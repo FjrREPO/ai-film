@@ -90,7 +90,11 @@ const Home = () => {
 
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/predict', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      if (!apiUrl) {
+        throw new Error('API URL is not defined');
+      }
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
